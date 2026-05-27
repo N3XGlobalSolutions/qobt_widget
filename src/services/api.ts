@@ -47,7 +47,7 @@ export async function sendMessage(
   apiBaseUrl: string,
   apiKey?: string
 ): Promise<ChatResponse> {
-  const api = getApi(https://bxyywscce9.execute-api.us-east-1.amazonaws.com/dev);
+  const api = getApi("https://bxyywscce9.execute-api.us-east-1.amazonaws.com/dev");
 
   const headers: Record<string, string> = {};
   if (apiKey) {
@@ -63,7 +63,7 @@ export async function sendMessage(
  */
 export async function pingBackend(apiBaseUrl: string): Promise<boolean> {
   try {
-    const api = getApi(https://bxyywscce9.execute-api.us-east-1.amazonaws.com/dev);
+    const api = getApi("https://bxyywscce9.execute-api.us-east-1.amazonaws.com/dev");
     await api.get('/health', { timeout: 5000 });
     return true;
   } catch {
