@@ -47,7 +47,10 @@ function bootstrap() {
     console.error('[QBot Widget] tenantId is required in window.QBotConfig.');
     return;
   }
-  
+   if (!config.apiBaseUrl) {
+    console.error('[QBot Widget] apiBaseUrl is required in window.QBotConfig.');
+    return;
+  }
 
   // ─── Host element: full-viewport fixed overlay (pointer-events:none) ───
   // This is the KEY fix: the host covers the entire viewport so that
