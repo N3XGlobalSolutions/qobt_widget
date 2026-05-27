@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QBot Widget — Development Sandbox</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        background: #f1f5f9;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      .sandbox-card {
+        background: white;
+        border-radius: 24px;
+        padding: 2.5rem;
+        max-width: 680px;
+        width: 100%;
+        box-shadow: 0 4px 40px rgba(0,0,0,0.08);
+        border: 1px solid #e2e8f0;
+      }
+      h1 {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: #1e293b;
+        margin-bottom: 0.5rem;
+      }
+      p.subtitle {
+        color: #64748b;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
+      .code-block {
+        background: #0f172a;
+        border-radius: 14px;
+        padding: 1.25rem 1.5rem;
+        font-family: 'Fira Code', 'Fira Mono', Consolas, monospace;
+        font-size: 0.78rem;
+        color: #94a3b8;
+        overflow-x: auto;
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+        border: 1px solid #1e293b;
+      }
+      .code-block .kw { color: #818cf8; }
+      .code-block .str { color: #86efac; }
+      .code-block .key { color: #7dd3fc; }
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+      .info-item {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 0.875rem 1rem;
+      }
+      .info-item .label {
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+      }
+      .info-item .value {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #1e293b;
+      }
+      .badge {
+        display: inline-block;
+        background: #f0fdf4;
+        color: #16a34a;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.2rem 0.6rem;
+        border-radius: 100px;
+        border: 1px solid #bbf7d0;
+      }
+      .controls {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+      }
+      .btn {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+      }
+      .btn-primary { background: #4f46e5; color: white; }
+      .btn-primary:hover { background: #4338ca; }
+      .btn-outline { background: white; color: #64748b; border-color: #e2e8f0; }
+      .btn-outline:hover { background: #f8fafc; }
+    </style>
+  </head>
+  <body>
+    <div class="sandbox-card">
+      <h1>🤖 QBot Widget Sandbox</h1>
+      <p class="subtitle">
+        Development environment for the embeddable QBot chat widget.
+        The floating chat bubble should appear in the 
+        <strong>bottom-right corner</strong> of this page.
+      </p>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="label">Tenant ID</div>
+          <div class="value">f806bc4d-859d-4d6e-bea0-8433f495991c</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Backend API</div>
+          <div class="value">localhost:8000</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Widget Server</div>
+          <div class="value">localhost:5173</div>
+        </div>
+        <div class="info-item">
+          <div class="label">Status</div>
+          <div class="value"><span class="badge">Dev Mode</span></div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <span class="kw">&lt;script&gt;</span><br>
+        &nbsp;&nbsp;<span class="key">window.QBotConfig</span> = {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">apiKey</span>: <span class="str">"aob_6bNf60G6QXyHDFZai8NtmrK_wvmbfO6kW6cTGCtcwPE"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">tenantId</span>: <span class="str">"f806bc4d-859d-4d6e-bea0-8433f495991c"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">apiBaseUrl</span>: <span class="str">"http://localhost:8000"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="key">theme</span>: { <span class="key">primary</span>: <span class="str">"#4F46E5"</span> }<br>
+        &nbsp;&nbsp;};<br>
+        <span class="kw">&lt;/script&gt;</span><br>
+        <span class="kw">&lt;script</span> <span class="key">src</span>=<span class="str">"http://localhost:5173/widget.js"</span><span class="kw">&gt;&lt;/script&gt;</span>
+      </div>
+
+      <p style="font-size:0.78rem;color:#94a3b8;margin-bottom:0.75rem;">
+        Programmatic controls (via <code>window.QBot.*</code>):
+      </p>
+      <div class="controls">
+        <button class="btn btn-primary" onclick="window.QBot?.open()">Open Widget</button>
+        <button class="btn btn-outline" onclick="window.QBot?.close()">Close Widget</button>
+        <button class="btn btn-outline" onclick="window.QBot?.toggle()">Toggle Widget</button>
+      </div>
+    </div>
+
+    <!-- Widget Configuration -->
+    <script>
+      window.QBotConfig = {
+        apiKey: "aob_6bNf60G6QXyHDFZai8NtmrK_wvmbfO6kW6cTGCtcwPE",
+        tenantId: "f806bc4d-859d-4d6e-bea0-8433f495991c",
+        apiBaseUrl: "http://localhost:8000",
+        botName: "UrbanNest Assistant",
+        botAvatar: "https://cdn-icons-png.flaticon.com/512/4712/4712109.png",
+        placeholder: "Type your message...",
+        welcomeTitle: "Welcome to UrbanNest! 👋",
+        welcomeSubtitle: "I am your AI real estate assistant. Ask me anything about our premium properties.",
+        theme: {
+          primary: "#4F46E5",
+          secondary: "#6366F1"
+        },
+        position: "bottom-right"
+      };
+    </script>
+    <!-- Widget Script (Vite dev server serves it as module) -->
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

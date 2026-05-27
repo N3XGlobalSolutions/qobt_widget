@@ -1,0 +1,210 @@
+/* ============================================================
+   QBot Widget Global CSS
+   Tailwind base + custom widget styles
+   This file is injected into the JS bundle by vite-plugin-css-injected-by-js
+   and applied to the Shadow DOM root.
+   ============================================================ */
+
+/* === Widget Font === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Widget Reset (scoped inside Shadow DOM) === */
+:host {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  line-height: 1.5;
+
+  /* --- Premium Design Tokens --- */
+  --qbot-width: 380px;
+  --qbot-height: 600px;
+  --qbot-border-radius: 20px;
+  --qbot-window-bottom: 85px;
+  --qbot-window-right: 20px;
+  --qbot-window-left: 20px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* === Scrollbar styles === */
+.qbot-messages::-webkit-scrollbar {
+  width: 4px;
+}
+.qbot-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+.qbot-messages::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+.qbot-messages::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* === Hide scrollbar for quick replies === */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* === Markdown prose styles within messages === */
+.qbot-prose p {
+  margin-bottom: 0.5rem;
+}
+.qbot-prose p:last-child {
+  margin-bottom: 0;
+}
+.qbot-prose ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.qbot-prose ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.qbot-prose li {
+  margin-bottom: 0.2rem;
+}
+.qbot-prose strong {
+  font-weight: 600;
+}
+.qbot-prose em {
+  font-style: italic;
+}
+.qbot-prose code {
+  background: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-size: 0.8125rem;
+  font-family: 'Fira Code', 'Fira Mono', Consolas, monospace;
+  color: #e11d48;
+}
+.qbot-prose pre {
+  background: #111827;
+  color: #f3f4f6;
+  padding: 0.75rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+  font-size: 0.8125rem;
+}
+.qbot-prose pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+.qbot-prose a {
+  color: #4f46e5;
+  text-decoration: underline;
+}
+.qbot-prose a:hover {
+  color: #4338ca;
+}
+.qbot-prose h1 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+.qbot-prose h2 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem; }
+.qbot-prose h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; }
+.qbot-prose blockquote {
+  border-left: 4px solid #d1d5db;
+  padding-left: 0.75rem;
+  font-style: italic;
+  color: #6b7280;
+  margin: 0.5rem 0;
+}
+.qbot-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dbeafe;
+}
+.qbot-prose th {
+  background: #eff6ff;
+  padding: 0.375rem 0.625rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  white-space: nowrap;
+}
+.qbot-prose td {
+  padding: 0.375rem 0.625rem;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  white-space: nowrap;
+}
+.qbot-prose tr:nth-child(even) td {
+  background: #f9fafb;
+}
+
+/* === Responsive Styles & Layouts === */
+.qbot-chat-window-container {
+  width: var(--qbot-width) !important;
+  height: var(--qbot-height) !important;
+  border-radius: var(--qbot-border-radius) !important;
+}
+
+/* Tablet viewports (481px to 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  :host {
+    --qbot-width: 400px;
+    --qbot-height: 640px;
+    --qbot-border-radius: 20px;
+    --qbot-window-bottom: 85px;
+    --qbot-window-right: 20px;
+  }
+}
+
+/* Mobile viewports (<= 480px) */
+@media (max-width: 480px) {
+  :host {
+    --qbot-width: 100vw;
+    --qbot-height: 100vh;
+    --qbot-border-radius: 0px;
+    --qbot-window-bottom: 0px;
+    --qbot-window-right: 0px;
+    --qbot-window-left: 0px;
+  }
+
+  .qbot-chat-window-container {
+    /* When closed on mobile, collapse completely to free touch space */
+    width: 0px !important;
+    height: 0px !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    bottom: -100px !important;
+    right: -100px !important;
+  }
+
+  .qbot-chat-window-container.widget-open {
+    /* When open on mobile, cover the full screen */
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: auto !important;
+  }
+
+  .qbot-toggle-btn-container.widget-open {
+    display: none !important;
+  }
+}
+
+
